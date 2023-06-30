@@ -17,4 +17,8 @@ export class CoursesService {
       tap(courses => console.log(courses))
     );
   }
+
+  save(record: Course) {
+    console.log(record)
+  }
 }
