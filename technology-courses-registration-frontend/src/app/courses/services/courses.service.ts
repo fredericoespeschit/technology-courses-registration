@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course';
-import { take, tap } from 'rxjs';
+import { first, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class CoursesService {
   }
 
   save(record: Course) {
-    console.log(record)
+  //   console.log(record)
+  return this.httpClient.post<Course>(this.API, record).pipe(first());
+  //O que é o parametro first? o que ele faz??
   }
+
+
 }
