@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
 import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
@@ -25,10 +28,14 @@ export class CourseFormComponent {
 
   onSubmit() {
     this.service.save(this.form.value)
-    .subscribe(result => console.log(result), error => {
-      this.snackBar.open(message: 'Erro ao valvar curso')
-
-    });
+    .pipe(
+      tap(result => console.log(result)),
+      catchError(error => {
+        this.snackBar.open('Erro ao salvar curso');
+        return of(null); // Retorna um Observable vazio
+      })
+    )
+    .subscribe();
   }
 
   onCancel(){
