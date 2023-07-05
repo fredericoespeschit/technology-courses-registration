@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
+
 import { CoursesService } from '../services/courses.service';
 import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +18,8 @@ export class CourseFormComponent {
   constructor(private formBuilder: FormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private location: Location
     ) {
     this.form = this.formBuilder.group({
       name: [null],
@@ -41,6 +44,7 @@ export class CourseFormComponent {
 
   private onSuccess(){
     this.snackBar.open('Curso salvo com sucesso', '', {duration: 5000});
+    this.location.back();
   }
 
   onCancel(){
