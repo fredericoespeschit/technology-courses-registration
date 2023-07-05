@@ -29,13 +29,18 @@ export class CourseFormComponent {
   onSubmit() {
     this.service.save(this.form.value)
     .pipe(
-      tap(result => console.log(result)),
+      tap(result => this.onSuccess()),
       catchError(error => {
         this.snackBar.open('Erro ao salvar curso');
         return of(null); // Retorna um Observable vazio
       })
     )
     .subscribe();
+
+  }
+
+  private onSuccess(){
+    this.snackBar.open('Curso salvo com sucesso', '', {duration: 5000});
   }
 
   onCancel(){
