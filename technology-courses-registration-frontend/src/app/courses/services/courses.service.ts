@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Course } from "../models/course";
-import { first, take, tap } from "rxjs";
+import { delay, first, take, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
