@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Course } from "../models/course";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -9,13 +9,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class CoursesListComponent {
   @Input() courses: Course[] = [];
+  @Output() add = new EventEmitter(false);
 
   readonly displayedColumns = ["name", "category", "actions"];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor() {}
 
   onAdd() {
-    // console.log('Clicou')
-    this.router.navigate(["new"], { relativeTo: this.route });
+    this.add.emit(true)
   }
 }
