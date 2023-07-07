@@ -1,6 +1,6 @@
+import { Course } from './../../models/course';
 import { Component } from "@angular/core";
 
-import { Course } from "../../models/course";
 import { CoursesService } from "../../services/courses.service";
 import { Observable, catchError, of } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
@@ -44,6 +44,10 @@ export class CoursesComponent {
  onAdd(){
   // console.log('Clicou')
   this.router.navigate(['new'], {relativeTo: this.route});
+ }
+
+ onEdit(course: Course) {
+  this.router.navigate(['edit', course._id], {relativeTo: this.route});
  }
 }
 

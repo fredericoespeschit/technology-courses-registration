@@ -13,6 +13,10 @@ const routes: Routes = [
     path: "new",
     component: CourseFormComponent,
   },
+  {
+    path: "edit/:id",
+    component: CourseFormComponent,
+  }
 ];
 
 @NgModule({
