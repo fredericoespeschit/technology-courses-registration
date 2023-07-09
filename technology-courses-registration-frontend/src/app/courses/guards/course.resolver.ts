@@ -1,15 +1,21 @@
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+
 import { CoursesService } from '../services/courses.service';
 import { Course } from '../models/course';
 
+@Injectable({
+  providedIn: 'root'
+})
+export class CourseResolver {
+  constructor(private service: CoursesService) { }
 
-export const courseResolver: ResolveFn<Course> = (route, state) => {
-  constructor( private service: CoursesService) {}
-  
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
     if (route.params && route.params['id']) {
       return this.service.loadById(route.params['id']);
     }
-    return {_id: '', name: '', category: ''};
+
+    return of({ _id: '', name: '', category: '', lessons: [] });
   }
-};
+}
