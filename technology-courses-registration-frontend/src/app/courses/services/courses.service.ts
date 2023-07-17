@@ -19,7 +19,7 @@ export class CoursesService {
   }
 
   loadById(id: string){
-    return this.httpClient.get<Course>(`${this.API}/${id}}`);
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 
   save(record: Partial<Course>) {
